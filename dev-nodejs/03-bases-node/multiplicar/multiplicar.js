@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 let crearArchivo = (base) => {
+    console.log("base: "+base);
     return new Promise((resolve,reject) => {
 
         if(!Number(base)) {
@@ -16,12 +17,10 @@ let crearArchivo = (base) => {
         }
 
         fs.writeFile(`archivos/tabla-${base}.txt`,contenido, (err) => {
-
-          if(err)
-            reject(err)
-          else
-            resolve(`tabla-${base}.txt`);
-
+            if(err)
+              reject(err)
+            else
+              resolve(`tabla-${base}.txt`);
         });
 
     });
