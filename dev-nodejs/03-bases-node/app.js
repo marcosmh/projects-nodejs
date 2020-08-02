@@ -1,11 +1,16 @@
 
-const argv = require('yargs').
-    command('listar','Imprime en la consola la tabla de multiplicar',{
+const argv = require('yargs')
+    .command('listar','Imprime en la consola la tabla de multiplicar',{
         base: {
           demand: true,
           alias: 'b'
+        },
+        limite: {
+          alias: 'l',
+          default: 10
         }
     })
+    .help()
     .argv;
 
 const { crearArchivo } = require('./multiplicar/multiplicar.js');
