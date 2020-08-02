@@ -1,13 +1,9 @@
 
 const argv = require('./config/yargs').argv;
-
-console.log(JSON.stringify(argv));
+const colors = require('colors');
 
 const { crearArchivo, listarTabla } = require('./multiplicar/multiplicar.js');
 let comando = argv._[0];
-
-
-console.log("comando: "+JSON.stringify(comando));
 
 //console.log(process.argv);
 // node app --base10
@@ -24,9 +20,9 @@ switch(comando) {
       .catch(err => console.log('Error'));
     break;
   case 'crear':
-    console.log(`Crear Archivo con la Tabla del Núm. ${argv.base}`);
+    console.log(`Crear Archivo con la Tabla del Núm. ${argv.base}`.magenta);
     crearArchivo(argv.base,argv.limite)
-      .then(archivo => console.log(`El archivo ${archivo} ha sido creado.`))
+      .then(archivo => console.log(`El archivo ${archivo} ha sido creado.`.brightGreen))
       .catch(err => console.log("Error: ",err));
     break;
   default:
