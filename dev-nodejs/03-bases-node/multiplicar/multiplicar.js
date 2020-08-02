@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 
-let listarTabla = (base, limite) => {
-  
+let listarTabla = (base, limite = 10) => {
+
   return new Promise((resolve,reject) => {
 
     if(!Number(base)) {
@@ -26,8 +26,8 @@ let listarTabla = (base, limite) => {
 
 }
 
-let crearArchivo = (base) => {
-    console.log("base: "+base);
+let crearArchivo = (base, limite = 10) => {
+
     return new Promise((resolve,reject) => {
 
         if(!Number(base)) {
@@ -37,7 +37,7 @@ let crearArchivo = (base) => {
 
         let contenido = '';
 
-        for(let i = 1; i <= 10; i++) {
+        for(let i = 1; i <= limite; i++) {
             console.log(`${i} * ${base} =`,i * base);
             contenido += `${i} * ${base} = ${ i * base} \n`;
         }

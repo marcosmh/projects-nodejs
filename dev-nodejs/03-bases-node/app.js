@@ -31,8 +31,8 @@ switch(comando) {
       .catch(err => console.log('Error'));
     break;
   case 'crear':
-    console.log('crear');
-    crearArchivo(argv.base)
+    console.log(`Crear Archivo con la Tabla del Núm. ${argv.base}`);
+    crearArchivo(argv.base,argv.limite)
       .then(archivo => console.log(`El archivo ${archivo} ha sido creado.`))
       .catch(err => console.log("Error: ",err));
     break;
