@@ -24,8 +24,8 @@ switch (comando) {
       .catch(err => console.log(err.red));*/
 
       let tarea = crear(argv.descripcion);
-      //
-      console.log("tarea: "+tarea);
+
+      //console.log("tarea: "+tarea);
 
 
     break;

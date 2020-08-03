@@ -12,7 +12,20 @@ let guardarDB = () => {
     });
 }
 
+let cargarBD = ()=> {
+
+  try {
+      listadoPorHacer = require('../db/data.json');
+  } catch(error) {
+    listadoPorHacer = [];
+  }
+
+}
+
 let crear = (descripcion) => {
+
+    cargarBD();
+
     let porHacer = {
       descripcion,
       completado: false
@@ -20,7 +33,9 @@ let crear = (descripcion) => {
     listadoPorHacer.push(porHacer);
     guardarDB();
     return porHacer;
+
 }
+
 
 
 let crearLista = (descripcion) => {
@@ -28,7 +43,7 @@ let crearLista = (descripcion) => {
       if(descripcion) {
         reject('Escriba una descripción');
       }
-      fs.writeFile(`./archivos/lista-por-hacer.txt`,descripcion, (err) => {
+      fs.writeFile(`./archivos/lista-por-hacer.txt`,descripcion+"\n", (err) => {
           if(err)
             reject(err);
           else
