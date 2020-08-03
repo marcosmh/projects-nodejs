@@ -8,6 +8,7 @@ const colors = require('colors');
 
 console.log("argumentos: " +  JSON.stringify(argv));
 
+const { crearLista } = require('./por-hacer/por-hacer');
 const comando = argv._[0];
 
 console.log("comando: "+comando);
@@ -18,6 +19,9 @@ switch (comando) {
     break;
   case 'crear':
     console.log('crear');
+    crearLista(argv.descripcion)
+      .then(archivo => console.log(`Archivo ${archivo} ha sido creado.`.green))
+      .catch(err => console.log(err.red));
     break;
   case 'actualizar':
     console.log('actualizar');
