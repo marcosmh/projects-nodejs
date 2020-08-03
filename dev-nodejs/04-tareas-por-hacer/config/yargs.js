@@ -15,7 +15,7 @@ const opts = {
 
 
 const argv = require('yargs')
-  .command('listar','Listar Tareas',opts)
+  .command('listar','Listar Tareas')
   .command('crear','Crear Lista de Tarea',opts)
   .command('actualizar','Actualizar Lista de Tarea',opts)
   .help()

@@ -37,6 +37,11 @@ let crear = (descripcion) => {
 }
 
 
+let getListado = ()=> {
+  cargarBD();
+  return listadoPorHacer;
+}
+
 
 let crearLista = (descripcion) => {
     return new Promise((resolve,reject) => {
@@ -54,5 +59,6 @@ let crearLista = (descripcion) => {
 
 module.exports = {
   crear,
+  getListado,
   crearLista
 }
