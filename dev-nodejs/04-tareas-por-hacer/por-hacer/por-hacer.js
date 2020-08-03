@@ -57,8 +57,24 @@ let crearLista = (descripcion) => {
     });
 }
 
+
+let actualizar = (descripcion,completado = true) => {
+      cargarBD();
+      console.log("param: "+descripcion);
+      let index = listadoPorHacer.findIndex(tarea => tarea.descripcion === descripcion);
+      console.log("index: "+index);
+      if(index >= 0) {
+        listadoPorHacer[index].completado = completado;
+        guardarDB();
+        return true;
+      } else {
+        return false;
+      }
+}
+
 module.exports = {
   crear,
   getListado,
+  actualizar,
   crearLista
 }
