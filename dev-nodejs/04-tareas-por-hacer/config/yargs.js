@@ -18,6 +18,7 @@ const argv = require('yargs')
   .command('listar','Listar Tareas')
   .command('crear','Crear Lista de Tarea',opts)
   .command('actualizar','Actualizar Lista de Tarea',opts)
+  .command('borrar','Borrar Lista de Tarea',opts)
   .help()
   .argv;
 

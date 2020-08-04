@@ -1,7 +1,6 @@
 const fs = require('fs');
 const colors = require('colors');
 
-
 let listadoPorHacer = [];
 
 let guardarDB = () => {
@@ -13,19 +12,15 @@ let guardarDB = () => {
 }
 
 let cargarBD = ()=> {
-
   try {
       listadoPorHacer = require('../db/data.json');
   } catch(error) {
     listadoPorHacer = [];
   }
-
 }
 
 let crear = (descripcion) => {
-
     cargarBD();
-
     let porHacer = {
       descripcion,
       completado: false
@@ -33,7 +28,6 @@ let crear = (descripcion) => {
     listadoPorHacer.push(porHacer);
     guardarDB();
     return porHacer;
-
 }
 
 
@@ -60,9 +54,7 @@ let crearLista = (descripcion) => {
 
 let actualizar = (descripcion,completado = true) => {
       cargarBD();
-      console.log("param: "+descripcion);
       let index = listadoPorHacer.findIndex(tarea => tarea.descripcion === descripcion);
-      console.log("index: "+index);
       if(index >= 0) {
         listadoPorHacer[index].completado = completado;
         guardarDB();
@@ -72,9 +64,26 @@ let actualizar = (descripcion,completado = true) => {
       }
 }
 
+let borrar = (descripcion) => {
+    console.log("param: "+ descripcion);
+    cargarBD();
+    let nuevoListado = listadoPorHacer.filter(tarea => tarea.descripcion !== descripcion);
+    console.log("nuevoListado: "+nuevoListado);
+    if(nuevoListado.length === listadoPorHacer.length) {
+      return false;
+    } else {
+      listadoPorHacer = nuevoListado;
+      guardarDB();
+      return true;
+    }
+
+
+}
+
 module.exports = {
   crear,
   getListado,
   actualizar,
+  borrar,
   crearLista
 }
