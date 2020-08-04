@@ -76,8 +76,6 @@ let borrar = (descripcion) => {
       guardarDB();
       return true;
     }
-
-
 }
 
 module.exports = {
