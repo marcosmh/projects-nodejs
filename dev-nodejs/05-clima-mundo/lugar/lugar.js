@@ -13,9 +13,7 @@ const getLugarLatLng = async (dir) => {
     });
 
     const result = await instance.get();
-
-    console.log("result: "+result);
-
+    
     if(result.data.Results === 0) {
        throw new Error(`No hay resultados para ${dir}`);
     }
