@@ -1,7 +1,7 @@
 ## Webserver - HTTP - EXPRESS - HBS
 
 
-# Ejeuctar
+# Ejecutar
 ```
 npm install
 ```
