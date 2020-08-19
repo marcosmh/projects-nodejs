@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
 
@@ -8,7 +9,32 @@ const app = express();
 
 
 app.get('/usuario', (req, res) => {
-  res.json("get Usuario");
+
+  let desde = Number(req.query.desde) || 0;
+  let limite = Number(req.query.limite) || 5;
+
+  Usuario.find({},'nombre email role estado google img')
+        .skip(desde)
+        .limit(limite)
+        .exec((err,usuarios) =>{
+
+           if(err) {
+               return res.status(400).json({
+                   ok: false,
+                   err
+               });
+           }
+
+
+           Usuario.count({},(err,registros) => {
+             res.json({
+               ok: true,
+               usuarios,
+               registros
+             });
+           });
+
+         });
 });
 
 
@@ -32,7 +58,7 @@ app.post('/usuario', (req, res) => {
       }
 
       usuarioDB.password = null;
-      
+
       res.json({
         ok: true,
         usuario: usuarioDB
@@ -45,15 +71,29 @@ app.post('/usuario', (req, res) => {
 
 app.put('/usuario/:id', (req, res) => {
   let id = req.params.id;
+  let body = _.pick(req.body,['nombre', 'email', 'img', 'role', 'estado']);
 
-  res.json({
-      id,
-      nombre: 'Marcos'
-  });
+  Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true}, (err,usuarioBD) => {
+
+      if(err) {
+          return res.status(400).json({
+              ok: false,
+              err
+          });
+      }
+
+      res.json({
+        ok: true,
+        usuario: usuarioBD
+      });
+
+
+    });
+
 });
 
-app.delete('/usuario', (req, res) => {
-  res.json("delete Usuario");
+app.delete('/usuario/:id', (req, res) => {
+
 });
 
 
