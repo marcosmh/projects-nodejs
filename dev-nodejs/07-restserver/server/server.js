@@ -17,8 +17,9 @@ app.use(bodyParser.json());
 
 //const port = process.env.PORT || 3000;
 
+//Configuracion global de rutas
+app.use(require('./routes/routes'));
 
-app.use(require('./routes/usuario'))
 
 mongoose.connect(process.env.URLDB,
                 { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true},
