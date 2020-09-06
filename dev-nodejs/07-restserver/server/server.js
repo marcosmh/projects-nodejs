@@ -3,6 +3,7 @@ require('./config/config');
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use(bodyParser.json());
 
 //const port = process.env.PORT || 3000;
 
+//habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname,'../public')));
+
 //Configuracion global de rutas
 app.use(require('./routes/routes'));
 
@@ -29,6 +33,7 @@ mongoose.connect(process.env.URLDB,
 
     console.log('Base de Datos Online')
 });
+
 
 app.listen(process.env.PORT, ()=> {
   console.log(`Escuchando en el puerto: `,process.env.PORT);
