@@ -14,6 +14,8 @@ let Categoria = require('../models/categoria');
 app.get('/categoria',(req,res) => {
 
   Categoria.find({})
+    .sort('descripcion')
+    .populate('usuario','nombre email')
     .exec((err,categoriaDB) => {
 
       if(err) {
@@ -32,7 +34,7 @@ app.get('/categoria',(req,res) => {
 
       res.json({
         ok: true,
-        categoria: categoriaDB
+        categorias: categoriaDB
       });
 
     });
