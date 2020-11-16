@@ -5,7 +5,12 @@ const app = express();
 app.use(fileUpload({ useTempFiles: true }));
 //app.use(fileUpload());
 
-app.put('/upload', function(req, res) {
+const Usuario = require('../models/usuario');
+
+app.put('/upload/:tipo/:id', function(req, res) {
+
+    let tipo = req.params.tipo;
+    let id = req.params.id;
 
     if (!req.files) {
         return res.status(400)
@@ -16,6 +21,19 @@ app.put('/upload', function(req, res) {
                 }
             });
     }
+
+
+    //valida tipo de archivo
+    let tiposPermitidos = ['productos', 'usuarios'];
+    if (tiposPermitidos.indexOf(tipo) < 0) {
+        return res.status(400).json({
+            ok: false,
+            error: {
+                message: 'Los tipos permitidos son' + tiposPermitidos.join(',')
+            }
+        });
+    }
+
 
     let archivo = req.files.archivo;
     let archivoSplit = archivo.name.split('.');
@@ -34,7 +52,11 @@ app.put('/upload', function(req, res) {
             })
     }
 
-    archivo.mv(`uploads/${archivo.name}`, function(err) {
+    let nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extension}`;
+    console.log("nombreArchivo: " + nombreArchivo);
+
+    archivo.mv(`uploads/${tipo}/${nombreArchivo}`, function(err) {
+
         if (err) {
             res.status(400)
                 .json({
